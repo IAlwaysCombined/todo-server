@@ -24,4 +24,4 @@ Route::get("/test",function (){
     return "hi";
 });
 
-Route::resource('/test2', CardController::class);
+Route::resource('/card', CardController::class);

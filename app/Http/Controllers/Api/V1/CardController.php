@@ -3,11 +3,20 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CardRequest;
+use App\Http\Resources\CardResource;
+use App\Models\Card;
 use App\Repositories\CardRepository;
 use App\Services\CardService;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
+/**
+ * Контроллер с карточками задач
+ */
 class CardController extends Controller
 {
     private CardService $cardService;
@@ -18,42 +27,42 @@ class CardController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Список задач
      */
-    public function index(): Collection|array
+    public function index(): AnonymousResourceCollection
     {
-        return $this->cardService->index();
+        return CardResource::collection($this->cardService->index());
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Создание новой задачи
      */
-    public function store(Request $request)
+    public function store(CardRequest $request): CardResource
     {
-        //
+        return new CardResource($this->cardService->create($request));
     }
 
     /**
-     * Display the specified resource.
+     * Информация о задаче
      */
-    public function show(string $id)
+    public function show(int $id): CardResource
     {
-        //
+        return new CardResource($this->cardService->view($id));
     }
 
     /**
-     * Update the specified resource in storage.
+     * Обновление задачи
      */
-    public function update(Request $request, string $id)
+    public function update(CardRequest $request, int $id): int
     {
-        //
+        return $this->cardService->update($request, $id);
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Удаление задачи
      */
-    public function destroy(string $id)
+    public function destroy(int $id)
     {
-        //
+        $this->cardService->delete($id);
     }
 }
