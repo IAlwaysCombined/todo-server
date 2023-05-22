@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\Api\V1\Auth\AuthController;
+use App\Http\Controllers\Api\V1\Auth\LogoutController;
+use App\Http\Controllers\Api\V1\Auth\RefreshController;
+use App\Http\Controllers\Api\V1\Auth\RegistrationController;
 use App\Http\Controllers\Api\V1\CardController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,13 +18,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix('auth')->group(function (){
+    Route::post('/registration', [RegistrationController::class, 'registration']);
+    Route::post('/login', [AuthController::class, 'login']);
+    Route::post('/logout', [LogoutController::class, 'logout']);
+    Route::post('/refresh', [RefreshController::class, 'refresh']);
 });
 
-
-Route::get("/test",function (){
-    return "hi";
+Route::middleware('auth:api')->group(function() {
+    Route::resource('/card', CardController::class);
 });
-
-Route::resource('/card', CardController::class);
