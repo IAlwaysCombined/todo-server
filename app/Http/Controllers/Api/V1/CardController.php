@@ -5,13 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CardRequest;
 use App\Http\Resources\CardResource;
-use App\Models\Card;
-use App\Repositories\CardRepository;
 use App\Services\CardService;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 /**
@@ -21,6 +15,10 @@ class CardController extends Controller
 {
     private CardService $cardService;
 
+    /**
+     * Инициализация сервиса
+     * @param CardService $cardService
+     */
     public function __construct(CardService $cardService)
     {
         $this->cardService = $cardService;

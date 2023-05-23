@@ -9,9 +9,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class TokenResource extends JsonResource
 {
     /**
-     * Transform the resource into an array.
-     *
-     * @return array<string, mixed>
+     * Преобразование ресурса в массив
      */
     public function toArray(Request $request): array
     {

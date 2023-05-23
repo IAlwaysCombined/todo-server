@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\RegistrationRequest;
 use App\Http\Resources\TokenResource;
 use App\Models\User;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class RegistrationController extends Controller
 {

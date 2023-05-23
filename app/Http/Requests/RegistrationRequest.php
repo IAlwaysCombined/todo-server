@@ -5,15 +5,10 @@ namespace App\Http\Requests;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-/**
- * @property mixed $name
- * @property mixed $email
- * @property mixed $password
- */
 class RegistrationRequest extends FormRequest
 {
     /**
-     * Determine if the user is authorized to make this request.
+     * Определите, авторизован ли пользователь для выполнения этого запроса
      */
     public function authorize(): bool
     {
@@ -21,7 +16,7 @@ class RegistrationRequest extends FormRequest
     }
 
     /**
-     * Get the validation rules that apply to the request.
+     * Получите правила проверки, применимые к запросу
      *
      * @return array<string, ValidationRule|array|string>
      */

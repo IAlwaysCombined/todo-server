@@ -9,15 +9,12 @@ use Illuminate\Http\Resources\Json\JsonResource;
 /**
  * @property int $id
  * @property string $title
- * @property int $table_id
  * @property array $tables
  */
 class WorkspaceResource extends JsonResource
 {
     /**
-     * Transform the resource into an array.
-     *
-     * @return array<string, mixed>
+     * Преобразование ресурса в массив
      */
     public function toArray(WorkspaceRequest|Request $request): array
     {

@@ -5,40 +5,66 @@ namespace App\Repositories;
 use App\Http\Requests\WorkspaceRequest;
 use App\Models\Workspace;
 use App\RepositoriesImpl\WorkspaceRepositoryImpl;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 class WorkspaceRepository implements WorkspaceRepositoryImpl
 {
     private Workspace $workspace;
 
+    /**
+     * @param Workspace $workspace
+     */
     public function __construct(Workspace $workspace)
     {
         $this->workspace = $workspace;
     }
 
+    /**
+     * @return Collection|array
+     */
     public function index(): Collection|array
     {
         return $this->workspace::query()->with('tables')->get()->all();
     }
 
-    public function view(int $id)
+    /**
+     * @param int $id
+     * @return Model|Collection|Builder|array|null
+     */
+    public function view(int $id): Model|Collection|Builder|array|null
     {
-        return $this->workspace::query()->with('tables')->get()->find($id);
+        return $this->workspace::query()->with('tables')->find($id);
     }
 
-    public function create(WorkspaceRequest|Request $request)
+    /**
+     * @param WorkspaceRequest|Request $request
+     * @return Model|Builder
+     */
+    public function create(WorkspaceRequest|Request $request): Model|Builder
     {
         return $this->workspace::query()->create($request->all());
     }
 
-    public function update(Request $request, int $id)
+    /**
+     * @param WorkspaceRequest|Request $request
+     * @param int $id
+     * @return Workspace
+     */
+    public function update(WorkspaceRequest|Request $request, int $id): Workspace
     {
-        // TODO: Implement update() method.
+        $this->workspace::query()->find($id)->update($request->all());
+        return $this->workspace;
     }
 
-    public function delete(int $id)
+    /**
+     * @param int $id
+     * @return bool
+     */
+    public function delete(int $id): bool
     {
-        // TODO: Implement delete() method.
+        return $this->workspace::query()->find($id)->delete();
     }
 }
