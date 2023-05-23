@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Spatie\Ignition\Tests\TestClasses\Models\Car;
 
 class CardRepository implements CardRepositoryImpl
 {
@@ -29,14 +30,18 @@ class CardRepository implements CardRepositoryImpl
         return $this->card::query()->get()->find($id);
     }
 
-    public function create(CardRequest|Request $request): Builder|Model
+    public function create(CardRequest|Request $request): Card
     {
-        return $this->card::query()->create($request->all());
+        $this->card->fill($request->all());
+        $this->card->user_id = auth()->user()->getAuthIdentifier();
+        $this->card->save();
+        return $this->card;
     }
 
-    public function update(CardRequest|Request $request, int $id): int
+    public function update(CardRequest|Request $request, int $id): Card
     {
-        return $this->card::query()->update($request->all());
+        $this->card::query()->update($request->all());
+        return $this->card;
     }
 
     public function delete(int $id): mixed

@@ -53,9 +53,9 @@ class CardController extends Controller
     /**
      * Обновление задачи
      */
-    public function update(CardRequest $request, int $id): int
+    public function update(CardRequest $request, int $id): CardResource
     {
-        return $this->cardService->update($request, $id);
+        return new CardResource($this->cardService->update($request, $id));
     }
 
     /**

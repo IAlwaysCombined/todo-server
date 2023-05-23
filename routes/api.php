@@ -5,6 +5,8 @@ use App\Http\Controllers\Api\V1\Auth\LogoutController;
 use App\Http\Controllers\Api\V1\Auth\RefreshController;
 use App\Http\Controllers\Api\V1\Auth\RegistrationController;
 use App\Http\Controllers\Api\V1\CardController;
+use App\Http\Controllers\Api\V1\TableController;
+use App\Http\Controllers\Api\V1\WorkspaceController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,4 +29,6 @@ Route::prefix('auth')->group(function (){
 
 Route::middleware('auth:api')->group(function() {
     Route::resource('/card', CardController::class);
+    Route::resource('/workspace', WorkspaceController::class);
+    Route::resource('/table', TableController::class);
 });

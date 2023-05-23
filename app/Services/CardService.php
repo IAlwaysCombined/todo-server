@@ -5,9 +5,7 @@ namespace App\Services;
 use App\Http\Requests\CardRequest;
 use App\Models\Card;
 use App\Repositories\CardRepository;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
 
 class CardService
 {
@@ -28,12 +26,12 @@ class CardService
         return $this->cardRepository->view($id);
     }
 
-    public function create(CardRequest $request): Builder|Model
+    public function create(CardRequest $request): Card
     {
         return $this->cardRepository->create($request);
     }
 
-    public function update(CardRequest $request, int $id): int
+    public function update(CardRequest $request, int $id): Card
     {
         return $this->cardRepository->update($request, $id);
     }

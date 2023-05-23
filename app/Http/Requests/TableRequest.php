@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CardRequest extends FormRequest
+class TableRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,9 +23,7 @@ class CardRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required',
-            'description' => 'required',
-            'table_id' => 'required'
+            'title' => 'required'
         ];
     }
 }
