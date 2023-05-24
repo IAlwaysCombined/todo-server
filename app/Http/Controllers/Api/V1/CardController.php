@@ -59,8 +59,8 @@ class CardController extends Controller
     /**
      * Удаление задачи
      */
-    public function destroy(int $id)
+    public function destroy(int $id): bool
     {
-        $this->cardService->delete($id);
+        return $this->cardService->delete($id);
     }
 }
