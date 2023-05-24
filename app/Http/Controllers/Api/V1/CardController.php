@@ -4,8 +4,12 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CardRequest;
+use App\Http\Requests\CardUserRequest;
 use App\Http\Resources\CardResource;
+use App\Models\Table;
 use App\Services\CardService;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 /**
@@ -62,5 +66,13 @@ class CardController extends Controller
     public function destroy(int $id): bool
     {
         return $this->cardService->delete($id);
+    }
+
+    /**
+     * Добавление участника к карточке
+     */
+    public function addMember(CardUserRequest $request): Model|Table|Builder
+    {
+        return $this->cardService->addMember($request);
     }
 }

@@ -3,7 +3,10 @@
 namespace App\Repositories;
 
 use App\Http\Requests\CardRequest;
+use App\Http\Requests\CardUserRequest;
 use App\Models\Card;
+use App\Models\CardUser;
+use App\Models\Table;
 use App\RepositoriesImpl\CardRepositoryImpl;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -13,13 +16,16 @@ use Illuminate\Http\Request;
 class CardRepository implements CardRepositoryImpl
 {
     private Card $card;
+    private CardUser $cardUser;
 
     /**
      * @param Card $card
+     * @param CardUser $cardUser
      */
-    public function __construct(Card $card)
+    public function __construct(Card $card, CardUser $cardUser)
     {
         $this->card = $card;
+        $this->cardUser = $cardUser;
     }
 
     /**
@@ -45,10 +51,7 @@ class CardRepository implements CardRepositoryImpl
      */
     public function create(CardRequest|Request $request): Card
     {
-        $this->card->fill($request->all());
-        $this->card->user_id = auth()->user()->getAuthIdentifier();
-        $this->card->save();
-        return $this->card;
+        return $this->card::query()->create($request->all());
     }
 
     /**
@@ -69,5 +72,14 @@ class CardRepository implements CardRepositoryImpl
     public function delete(int $id): bool
     {
         return $this->card::query()->find($id)->delete();
+    }
+
+    /**
+     * @param CardUserRequest $request
+     * @return Model|Table|\Illuminate\Database\Query\Builder
+     */
+    public function addMember(CardUserRequest $request): Model|Table|\Illuminate\Database\Query\Builder
+    {
+        return $this->cardUser::query()->create(['card_id' => $request->card_id, 'user_id' => $request->user_id]);
     }
 }

@@ -39,7 +39,6 @@ class Card extends Model
     protected $fillable = [
         'title',
         'description',
-        'user_id',
         'table_id'
     ];
 }

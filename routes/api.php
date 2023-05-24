@@ -30,6 +30,7 @@ Route::prefix('auth')->group(function (){
 
 Route::middleware('auth:api')->group(function() {
     Route::resource('/card', CardController::class);
+    //Route::post('/card/add-member', CardController::class);
     Route::resource('/workspace', WorkspaceController::class);
     Route::resource('/table', TableController::class);
     Route::resource('/user', UserController::class);

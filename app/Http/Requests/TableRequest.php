@@ -23,7 +23,8 @@ class TableRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required'
+            'title' => 'required',
+            'workspace_id' => 'required'
         ];
     }
 }
