@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('tables', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->foreignId('workspace_id')
+            $table->foreignId('board_id')
                 ->nullable()
                 ->references('id')
-                ->on('workspaces')
+                ->on('boards')
                 ->onDelete('cascade');
             $table->timestamps();
         });

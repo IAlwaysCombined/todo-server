@@ -45,9 +45,7 @@ class CardRepository implements CardRepositoryImpl
      */
     public function create(CardRequest|Request $request): Card
     {
-        $this->card->fill($request->all());
-        $this->card->user_id = auth()->user()->getAuthIdentifier();
-        $this->card->save();
+        $this->card::query()->create($request->all());
         return $this->card;
     }
 
@@ -58,7 +56,7 @@ class CardRepository implements CardRepositoryImpl
      */
     public function update(CardRequest|Request $request, int $id): Card
     {
-        $this->card::query()->find($id)->update($request->all());
+        $this->card::query()->findOrFail($id)->update($request->all());
         return $this->card;
     }
 

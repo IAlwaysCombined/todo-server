@@ -4,7 +4,7 @@ namespace App\RepositoriesImpl;
 
 use App\RepositoriesImpl\base\CrudRepositoryImpl;
 
-interface WorkspaceRepositoryImpl extends CrudRepositoryImpl
+interface BoardRepositoryImpl extends CrudRepositoryImpl
 {
-    public function indexTitle();
+
 }
