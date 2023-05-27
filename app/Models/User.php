@@ -23,6 +23,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @property mixed $email
  * @property mixed $password
  * @property int $id
+ * @property string $avatar
  * @property Carbon|null $email_verified_at
  * @property string|null $remember_token
  * @property Carbon|null $created_at
@@ -39,6 +40,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @method static Builder|User query()
  * @method static Builder|User whereCreatedAt($value)
  * @method static Builder|User whereEmail($value)
+ * @method static Builder|User whereAvatar($value)
  * @method static Builder|User whereEmailVerifiedAt($value)
  * @method static Builder|User whereId($value)
  * @method static Builder|User whereName($value)
@@ -55,6 +57,7 @@ class User extends Authenticatable implements JWTSubject
         'name',
         'email',
         'password',
+        'avatar'
     ];
 
     protected $hidden = [

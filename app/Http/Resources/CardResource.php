@@ -12,6 +12,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  * @property string $title
  * @property string $description
  * @property Collection $users
+ * @property Collection $comments
  */
 class CardResource extends JsonResource
 {
@@ -24,7 +25,8 @@ class CardResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'description' => $this->description,
-            'members' => MemberResource::collection($this->users)
+            'members' => SomeUserResource::collection($this->users),
+            'comments' => CommentResource::collection($this->comments)
         ];
     }
 }

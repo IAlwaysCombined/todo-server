@@ -8,8 +8,9 @@ use Illuminate\Http\Resources\Json\JsonResource;
 /**
  * @property int $id
  * @property string $name
+ * @property string $avatar
  */
-class MemberResource extends JsonResource
+class SomeUserResource extends JsonResource
 {
     /**
      * Преобразование ресурса в массив
@@ -19,7 +20,7 @@ class MemberResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'avatar' => "Not implemented"
+            'avatar' => $this->avatar ?? null //TODO: Delete this before implement avatars for users
         ];
     }
 }

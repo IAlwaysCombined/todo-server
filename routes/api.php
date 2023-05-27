@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\V1\Auth\RefreshController;
 use App\Http\Controllers\Api\V1\Auth\RegistrationController;
 use App\Http\Controllers\Api\V1\BoardController;
 use App\Http\Controllers\Api\V1\CardController;
+use App\Http\Controllers\Api\V1\CommentController;
 use App\Http\Controllers\Api\V1\TableController;
 use App\Http\Controllers\Api\V1\UserController;
 use App\Http\Controllers\Api\V1\WorkspaceController;
@@ -34,6 +35,7 @@ Route::prefix('v1')->group(function () {
         /** Роуты для карточек с тасками */
         Route::prefix('/card')->group(function () {
             Route::post('/member/add', [CardController::class, 'addMember']);
+            Route::apiResource('/comment', CommentController::class);
         });
         Route::apiResource('/card', CardController::class);
 
