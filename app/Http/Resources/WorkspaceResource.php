@@ -21,7 +21,6 @@ class WorkspaceResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
-            'tables' => TableResource::collection($this->tables)
         ];
     }
 }

@@ -3,7 +3,9 @@
 namespace App\Repositories;
 
 use App\Http\Requests\CardRequest;
+use App\Http\Requests\CardUserRequest;
 use App\Models\Card;
+use App\Models\CardUser;
 use App\RepositoriesImpl\CardRepositoryImpl;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -30,7 +32,7 @@ class CardRepository implements CardRepositoryImpl
      */
     public function index(): Collection|array
     {
-        return $this->card::query()->get()->all();
+        return $this->card::query()->with('users')->get()->all();
     }
 
     /**
@@ -39,17 +41,16 @@ class CardRepository implements CardRepositoryImpl
      */
     public function view(int $id): Builder|array|Collection|Model
     {
-        return $this->card::query()->find($id);
+        return $this->card::query()->with('users')->findOrFail($id);
     }
 
     /**
      * @param CardRequest|Request $request
-     * @return Card
+     * @return Model|Builder|Card
      */
-    public function create(CardRequest|Request $request): Card
+    public function create(CardRequest|Request $request): Model|Builder|Card
     {
-        $this->card::query()->create($request->all());
-        return $this->card;
+        return $this->card::query()->create($request->all());
     }
 
     /**
@@ -73,11 +74,12 @@ class CardRepository implements CardRepositoryImpl
     }
 
     /**
-     * @param CardUserRequest $request
-     * @return Model|Table|\Illuminate\Database\Query\Builder
+     * @param CardUserRequest|Request $request
+     * @return CardUser|Model|\Illuminate\Database\Query\Builder
      */
-    public function addMember(CardUserRequest $request): Model|Table|\Illuminate\Database\Query\Builder
+    public function addMember(CardUserRequest|Request $request): CardUser|Model|\Illuminate\Database\Query\Builder
     {
+        $this->cardUser::query()->create(['card_id' => $request->card_id, 'user_id' => $request->user_id]);
         return $this->cardUser::query()->create(['card_id' => $request->card_id, 'user_id' => $request->user_id]);
     }
 }

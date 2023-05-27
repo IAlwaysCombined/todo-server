@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CardRequest;
 use App\Http\Requests\CardUserRequest;
 use App\Http\Resources\CardResource;
+use App\Http\Resources\CardUserResource;
 use App\Models\Table;
 use App\Services\CardService;
 use Illuminate\Database\Eloquent\Model;
@@ -71,8 +72,8 @@ class CardController extends Controller
     /**
      * Добавление участника к карточке
      */
-    public function addMember(CardUserRequest $request): Model|Table|Builder
+    public function addMember(CardUserRequest $request): CardUserResource
     {
-        return $this->cardService->addMember($request);
+        return new CardUserResource($this->cardService->addMember($request));
     }
 }

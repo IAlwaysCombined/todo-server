@@ -2,26 +2,26 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Database\Eloquent\Collection;
+use App\Http\Requests\CardUserRequest;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
  * @property int $id
- * @property string $title
- * @property Collection $cards
+ * @property int $card_id
+ * @property int $user_id
  */
-class TableResource extends JsonResource
+class CardUserResource extends JsonResource
 {
     /**
      * Преобразование ресурса в массив
      */
-    public function toArray(Request $request): array
+    public function toArray(CardUserRequest|Request $request): array
     {
         return [
             'id' => $this->id,
-            'title' => $this->title,
-            'cards' => CardResource::collection($this->cards)
+            'card_id' => $this->card_id,
+            'user_id' => $this->user_id
         ];
     }
 }

@@ -7,6 +7,7 @@ use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 
 /**
@@ -37,4 +38,12 @@ class Board extends Model
         'title',
         'workspace_id'
     ];
+
+    /**
+     * Связь к сущьности Table
+     */
+    public function tables(): HasMany
+    {
+        return $this->hasMany(Table::class);
+    }
 }

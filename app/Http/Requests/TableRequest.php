@@ -24,7 +24,7 @@ class TableRequest extends FormRequest
     {
         return [
             'title' => 'required',
-            'workspace_id' => 'required'
+            'board_id' => 'required'
         ];
     }
 }

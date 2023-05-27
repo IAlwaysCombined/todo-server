@@ -27,15 +27,7 @@ class WorkspaceRepository implements WorkspaceRepositoryImpl
      */
     public function index(): Collection|array
     {
-        return $this->workspace::query()->with('tables')->get()->all();
-    }
-
-    /**
-     * @return array
-     */
-    public function indexTitle(): array
-    {
-        return $this->workspace::query()->select(['id', 'title'])->get()->all();
+        return $this->workspace::query()->get()->all();
     }
 
     /**
@@ -44,7 +36,7 @@ class WorkspaceRepository implements WorkspaceRepositoryImpl
      */
     public function view(int $id): Model|Collection|Builder|array|null
     {
-        return $this->workspace::query()->with('tables')->find($id);
+        return $this->workspace::query()->findOrFail($id);
     }
 
     /**
@@ -74,5 +66,13 @@ class WorkspaceRepository implements WorkspaceRepositoryImpl
     public function delete(int $id): bool
     {
         return $this->workspace::query()->find($id)->delete();
+    }
+
+    /**
+     * @return Collection|array
+     */
+    public function extendedWorkspace(): Collection|array
+    {
+        return $this->workspace::query()->with('boards')->get()->all();
     }
 }

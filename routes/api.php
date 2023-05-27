@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\V1\Auth\AuthController;
 use App\Http\Controllers\Api\V1\Auth\LogoutController;
 use App\Http\Controllers\Api\V1\Auth\RefreshController;
 use App\Http\Controllers\Api\V1\Auth\RegistrationController;
+use App\Http\Controllers\Api\V1\BoardController;
 use App\Http\Controllers\Api\V1\CardController;
 use App\Http\Controllers\Api\V1\TableController;
 use App\Http\Controllers\Api\V1\UserController;
@@ -21,38 +22,48 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('auth')->group(function () {
-    Route::post('/registration', [RegistrationController::class, 'registration']);
-    Route::post('/login', [AuthController::class, 'login']);
-    Route::post('/logout', [LogoutController::class, 'logout']);
-    Route::post('/refresh', [RefreshController::class, 'refresh']);
+Route::prefix('v1')->group(function () {
+    Route::prefix('auth')->group(function () {
+        Route::post('/registration', [RegistrationController::class, 'registration']);
+        Route::post('/login', [AuthController::class, 'login']);
+        Route::post('/logout', [LogoutController::class, 'logout']);
+        Route::post('/refresh', [RefreshController::class, 'refresh']);
+    });
+
+    Route::middleware('auth:api')->group(function () {
+        /** Роуты для карточек с тасками */
+        Route::prefix('/card')->group(function () {
+            Route::post('/member/add', [CardController::class, 'addMember']);
+        });
+        Route::apiResource('/card', CardController::class);
+
+
+        /** Роуты для таблиц */
+        Route::prefix('/table')->group(function () {
+            // Сюда добавлять роуты которые не в круд
+        });
+        Route::apiResource('/table', TableController::class);
+
+
+        /** Роуты для таблиц */
+        Route::prefix('/board')->group(function () {
+            // Сюда добавлять роуты которые не в круд
+        });
+        Route::apiResource('/board', BoardController::class);
+
+
+        /** Роуты для рабочих пространств */
+        Route::prefix('/workspace')->group(function () {
+            Route::get('/extended/list', [WorkspaceController::class, 'extendedIndex']);
+        });
+        Route::apiResource('/workspace', WorkspaceController::class);
+
+
+        /** Роуты для пользователя */
+        Route::prefix('/user')->group(function () {
+            // Сюда добавлять роуты которые не в круд
+        });
+        Route::apiResource('/user', UserController::class);
+    });
 });
 
-Route::middleware('auth:api')->group(function () {
-    /** Роуты для карточек с тасками */
-    Route::prefix('/card')->group(function () {
-        //Route::post('/add-member', CardController::class);
-    });
-    Route::apiResource('/card', CardController::class);
-
-
-    /** Роуты для рабочих пространств */
-    Route::prefix('/workspace')->group(function () {
-        Route::get('/titles', [WorkspaceController::class, 'indexTitle']);
-    });
-    Route::apiResource('/workspace', WorkspaceController::class);
-
-
-    /** Роуты для таблиц */
-    Route::prefix('/table')->group(function () {
-        // Сюда добавлять роуты которые не в круд
-    });
-    Route::apiResource('/table', TableController::class);
-
-
-    /** Роуты для пользователя */
-    Route::prefix('/user')->group(function () {
-        // Сюда добавлять роуты которые не в круд
-    });
-    Route::apiResource('/user', UserController::class);
-});

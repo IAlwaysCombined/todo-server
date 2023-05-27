@@ -12,15 +12,15 @@ use Illuminate\Foundation\Http\FormRequest;
 class CardUserRequest extends FormRequest
 {
     /**
-     * Determine if the user is authorized to make this request.
+     * Определите, авторизован ли пользователь для выполнения этого запроса
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
-     * Get the validation rules that apply to the request.
+     * Получите правила проверки, применимые к запросу
      *
      * @return array<string, ValidationRule|array|string>
      */

@@ -30,14 +30,6 @@ class WorkspaceService
     }
 
     /**
-     * @return array
-     */
-    public function indexTitle(): array
-    {
-        return $this->workspaceRepository->indexTitle();
-    }
-
-    /**
      * @param int $id
      * @return array|Builder|Collection|Model
      */
@@ -72,5 +64,13 @@ class WorkspaceService
     public function delete(int $id): bool
     {
         return $this->workspaceRepository->delete($id);
+    }
+
+    /**
+     * @return Collection|array
+     */
+    public function extendedWorkspace(): Collection|array
+    {
+        return $this->workspaceRepository->extendedWorkspace();
     }
 }

@@ -7,6 +7,9 @@ use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Carbon;
 
 /**
@@ -39,4 +42,12 @@ class Card extends Model
         'description',
         'table_id'
     ];
+
+    /**
+     * Связь к сущьности User
+     */
+    public function users(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'card_users');
+    }
 }

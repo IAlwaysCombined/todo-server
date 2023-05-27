@@ -7,6 +7,7 @@ use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 
 /**
@@ -26,6 +27,8 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Table whereId($value)
  * @method static Builder|Table whereTitle($value)
  * @method static Builder|Table whereUpdatedAt($value)
+ * @property int|null $workspace_id
+ * @method static Builder|Table whereWorkspaceId($value)
  * @mixin Eloquent
  */
 class Table extends Model
@@ -37,4 +40,12 @@ class Table extends Model
         'title',
         'board_id'
     ];
+
+    /**
+     * Связь к сущьности Card
+     */
+    public function cards(): HasMany
+    {
+        return $this->hasMany(Card::class);
+    }
 }

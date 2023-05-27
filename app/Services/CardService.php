@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Http\Requests\CardRequest;
 use App\Http\Requests\CardUserRequest;
 use App\Models\Card;
+use App\Models\CardUser;
 use App\Models\Table;
 use App\Repositories\CardRepository;
 use Illuminate\Database\Eloquent\Builder;
@@ -70,9 +71,9 @@ class CardService
 
     /**
      * @param CardUserRequest $request
-     * @return Model|Table|\Illuminate\Database\Query\Builder
+     * @return Model|CardUser|\Illuminate\Database\Query\Builder
      */
-    public function addMember(CardUserRequest $request): Model|Table|\Illuminate\Database\Query\Builder
+    public function addMember(CardUserRequest $request): Model|CardUser|\Illuminate\Database\Query\Builder
     {
         return $this->cardRepository->addMember($request);
     }

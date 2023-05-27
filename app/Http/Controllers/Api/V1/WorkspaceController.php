@@ -4,9 +4,8 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\WorkspaceRequest;
+use App\Http\Resources\WorkspaceExtendedResource;
 use App\Http\Resources\WorkspaceResource;
-use App\Http\Resources\WorkspaceTitleResource;
-use App\Models\Workspace;
 use App\Services\WorkspaceService;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
@@ -29,14 +28,6 @@ class WorkspaceController extends Controller
     public function index(): AnonymousResourceCollection
     {
         return WorkspaceResource::collection($this->workspaceService->index());
-    }
-
-    /**
-     * Список названий рабочих пространств
-     */
-    public function indexTitle(): AnonymousResourceCollection
-    {
-        return WorkspaceTitleResource::collection($this->workspaceService->indexTitle());
     }
 
     /**
@@ -69,5 +60,13 @@ class WorkspaceController extends Controller
     public function destroy(int $id): bool
     {
         return $this->workspaceService->delete($id);
+    }
+
+    /**
+     * Расширенная информация по рабочим пространствам
+     */
+    public function extendedIndex(): AnonymousResourceCollection
+    {
+        return WorkspaceExtendedResource::collection($this->workspaceService->extendedWorkspace());
     }
 }

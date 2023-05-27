@@ -6,5 +6,5 @@ use App\RepositoriesImpl\base\CrudRepositoryImpl;
 
 interface WorkspaceRepositoryImpl extends CrudRepositoryImpl
 {
-    public function indexTitle();
+    public function extendedWorkspace();
 }

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 
 /**
@@ -25,6 +26,8 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Workspace whereId($value)
  * @method static Builder|Workspace whereTitle($value)
  * @method static Builder|Workspace whereUpdatedAt($value)
+ * @property-read Collection<int, Board> $boards
+ * @property-read int|null $boards_count
  * @mixin Eloquent
  */
 class Workspace extends Model
@@ -35,4 +38,12 @@ class Workspace extends Model
         'id',
         'title'
     ];
+
+    /**
+     * Связь к сущьности Board
+     */
+    public function boards(): HasMany
+    {
+        return $this->hasMany(Board::class);
+    }
 }

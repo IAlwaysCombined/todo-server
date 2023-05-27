@@ -27,7 +27,7 @@ class BoardRepository implements BoardRepositoryImpl
      */
     public function index(): array|Collection
     {
-        return $this->board::query()->get()->all();
+        return $this->board::query()->with('tables')->get()->all();
     }
 
     /**
@@ -36,17 +36,16 @@ class BoardRepository implements BoardRepositoryImpl
      */
     public function view(int $id): array|Model|Collection|Builder|Board|null
     {
-        return $this->board::query()->findOrFail($id);
+        return $this->board::query()->with('tables')->findOrFail($id);
     }
 
     /**
      * @param BoardRequest|Request $request
-     * @return Board
+     * @return Model|Builder|Board
      */
-    public function create(BoardRequest|Request $request): Board
+    public function create(BoardRequest|Request $request): Model|Builder|Board
     {
-        $this->board::query()->create($request->all());
-        return $this->board;
+        return $this->board::query()->create($request->all());
     }
 
     /**

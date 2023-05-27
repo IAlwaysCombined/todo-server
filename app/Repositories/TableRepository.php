@@ -27,7 +27,7 @@ class TableRepository implements TableRepositoryImpl
      */
     public function index(): Collection|array
     {
-        return $this->table::query()->get()->all();
+        return $this->table::query()->with('cards')->get()->all();
     }
 
     /**
@@ -36,7 +36,7 @@ class TableRepository implements TableRepositoryImpl
      */
     public function view(int $id): Builder|array|Collection|Model
     {
-        return $this->table::query()->find($id);
+        return $this->table::query()->with('cards')->find($id);
     }
 
     /**
