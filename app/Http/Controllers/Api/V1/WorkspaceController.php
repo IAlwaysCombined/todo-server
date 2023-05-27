@@ -9,6 +9,9 @@ use App\Http\Resources\WorkspaceResource;
 use App\Services\WorkspaceService;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
+/**
+ * Контроллер с рабочими пространствами
+ */
 class WorkspaceController extends Controller
 {
     private WorkspaceService $workspaceService;

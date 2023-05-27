@@ -9,7 +9,6 @@ use App\RepositoriesImpl\BoardRepositoryImpl;
 use App\RepositoriesImpl\CardRepositoryImpl;
 use App\RepositoriesImpl\TableRepositoryImpl;
 use App\RepositoriesImpl\WorkspaceRepositoryImpl;
-use App\Services\BoardService;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
