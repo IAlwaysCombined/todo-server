@@ -23,7 +23,7 @@ class BoardRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required',
+            'title' => 'required|min:2',
             'workspace_id' => 'required'
         ];
     }

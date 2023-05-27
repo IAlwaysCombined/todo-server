@@ -23,7 +23,7 @@ class TableRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required',
+            'title' => 'required|min:2',
             'board_id' => 'required'
         ];
     }
