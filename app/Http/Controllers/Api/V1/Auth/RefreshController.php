@@ -3,11 +3,17 @@
 namespace App\Http\Controllers\Api\V1\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\TokenResource;
 
 class RefreshController extends Controller
 {
-    public function refresh()
+    /**
+     * Перевыпуск токена после истечения срока действия авторизационного токена
+     *
+     * @return TokenResource
+     */
+    public function refresh(): TokenResource
     {
-        //TODO: Доделать восстановление токена
+        return new TokenResource(auth()->refresh('',"", ""));
     }
 }
