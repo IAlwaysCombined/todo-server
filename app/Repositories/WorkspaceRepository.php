@@ -31,6 +31,14 @@ class WorkspaceRepository implements WorkspaceRepositoryImpl
     }
 
     /**
+     * @return array
+     */
+    public function indexTitle(): array
+    {
+        return $this->workspace::query()->select(['id', 'title'])->get()->all();
+    }
+
+    /**
      * @param int $id
      * @return Model|Collection|Builder|array|null
      */

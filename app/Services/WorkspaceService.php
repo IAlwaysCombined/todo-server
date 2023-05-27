@@ -30,6 +30,14 @@ class WorkspaceService
     }
 
     /**
+     * @return array
+     */
+    public function indexTitle(): array
+    {
+        return $this->workspaceRepository->indexTitle();
+    }
+
+    /**
      * @param int $id
      * @return array|Builder|Collection|Model
      */

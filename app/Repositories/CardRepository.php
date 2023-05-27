@@ -3,10 +3,7 @@
 namespace App\Repositories;
 
 use App\Http\Requests\CardRequest;
-use App\Http\Requests\CardUserRequest;
 use App\Models\Card;
-use App\Models\CardUser;
-use App\Models\Table;
 use App\RepositoriesImpl\CardRepositoryImpl;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -51,7 +48,8 @@ class CardRepository implements CardRepositoryImpl
      */
     public function create(CardRequest|Request $request): Card
     {
-        return $this->card::query()->create($request->all());
+        $this->card::query()->create($request->all());
+        return $this->card;
     }
 
     /**
@@ -61,7 +59,7 @@ class CardRepository implements CardRepositoryImpl
      */
     public function update(CardRequest|Request $request, int $id): Card
     {
-        $this->card::query()->find($id)->update($request->all());
+        $this->card::query()->findOrFail($id)->update($request->all());
         return $this->card;
     }
 
