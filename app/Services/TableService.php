@@ -5,20 +5,21 @@ namespace App\Services;
 use App\Http\Requests\TableRequest;
 use App\Models\Table;
 use App\Repositories\TableRepository;
+use App\RepositoriesImpl\TableRepositoryImpl;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 class TableService
 {
-    private TableRepository $tableRepository;
+    private TableRepositoryImpl $tableRepositoryImpl;
 
     /**
-     * @param TableRepository $tableRepository
+     * @param TableRepositoryImpl $tableRepositoryImpl
      */
-    public function __construct(TableRepository $tableRepository)
+    public function __construct(TableRepositoryImpl $tableRepositoryImpl)
     {
-        $this->tableRepository = $tableRepository;
+        $this->tableRepositoryImpl = $tableRepositoryImpl;
     }
 
     /**
@@ -26,7 +27,7 @@ class TableService
      */
     public function index(): Collection|array
     {
-        return $this->tableRepository->index();
+        return $this->tableRepositoryImpl->index();
     }
 
     /**
@@ -35,7 +36,7 @@ class TableService
      */
     public function view(int $id): array|Builder|Collection|Model
     {
-        return $this->tableRepository->view($id);
+        return $this->tableRepositoryImpl->view($id);
     }
 
     /**
@@ -44,7 +45,7 @@ class TableService
      */
     public function create(TableRequest $request): Builder|Model
     {
-        return $this->tableRepository->create($request);
+        return $this->tableRepositoryImpl->create($request);
     }
 
     /**
@@ -54,7 +55,7 @@ class TableService
      */
     public function update(TableRequest $request, int $id): Table
     {
-        return $this->tableRepository->update($request, $id);
+        return $this->tableRepositoryImpl->update($request, $id);
     }
 
     /**
@@ -63,6 +64,6 @@ class TableService
      */
     public function delete(int $id): bool
     {
-        return $this->tableRepository->delete($id);
+        return $this->tableRepositoryImpl->delete($id);
     }
 }

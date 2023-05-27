@@ -8,20 +8,21 @@ use App\Models\Card;
 use App\Models\CardUser;
 use App\Models\Table;
 use App\Repositories\CardRepository;
+use App\RepositoriesImpl\CardRepositoryImpl;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 class CardService
 {
-    private CardRepository $cardRepository;
+    private CardRepositoryImpl $cardRepositoryImpl;
 
     /**
-     * @param CardRepository $cardRepository
+     * @param CardRepositoryImpl $cardRepositoryImpl
      */
-    public function __construct(CardRepository $cardRepository)
+    public function __construct(CardRepositoryImpl $cardRepositoryImpl)
     {
-        $this->cardRepository = $cardRepository;
+        $this->cardRepositoryImpl = $cardRepositoryImpl;
     }
 
     /**
@@ -29,7 +30,7 @@ class CardService
      */
     public function index(): Collection|array
     {
-        return $this->cardRepository->index();
+        return $this->cardRepositoryImpl->index();
     }
 
     /**
@@ -38,7 +39,7 @@ class CardService
      */
     public function view(int $id): array|Builder|Collection|Model
     {
-        return $this->cardRepository->view($id);
+        return $this->cardRepositoryImpl->view($id);
     }
 
     /**
@@ -47,7 +48,7 @@ class CardService
      */
     public function create(CardRequest $request): Card
     {
-        return $this->cardRepository->create($request);
+        return $this->cardRepositoryImpl->create($request);
     }
 
     /**
@@ -57,7 +58,7 @@ class CardService
      */
     public function update(CardRequest $request, int $id): Card
     {
-        return $this->cardRepository->update($request, $id);
+        return $this->cardRepositoryImpl->update($request, $id);
     }
 
     /**
@@ -66,7 +67,7 @@ class CardService
      */
     public function delete(int $id): bool
     {
-        return $this->cardRepository->delete($id);
+        return $this->cardRepositoryImpl->delete($id);
     }
 
     /**
@@ -75,6 +76,6 @@ class CardService
      */
     public function addMember(CardUserRequest $request): Model|CardUser|\Illuminate\Database\Query\Builder
     {
-        return $this->cardRepository->addMember($request);
+        return $this->cardRepositoryImpl->addMember($request);
     }
 }

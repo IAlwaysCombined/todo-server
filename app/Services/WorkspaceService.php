@@ -5,20 +5,21 @@ namespace App\Services;
 use App\Http\Requests\WorkspaceRequest;
 use App\Models\Workspace;
 use App\Repositories\WorkspaceRepository;
+use App\RepositoriesImpl\WorkspaceRepositoryImpl;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 class WorkspaceService
 {
-    private WorkspaceRepository $workspaceRepository;
+    private WorkspaceRepositoryImpl $workspaceRepositoryImpl;
 
     /**
-     * @param WorkspaceRepository $workspaceRepository
+     * @param WorkspaceRepositoryImpl $workspaceRepositoryImpl
      */
-    public function __construct(WorkspaceRepository $workspaceRepository)
+    public function __construct(WorkspaceRepositoryImpl $workspaceRepositoryImpl)
     {
-        $this->workspaceRepository = $workspaceRepository;
+        $this->workspaceRepositoryImpl = $workspaceRepositoryImpl;
     }
 
     /**
@@ -26,7 +27,7 @@ class WorkspaceService
      */
     public function index(): Collection|array
     {
-        return $this->workspaceRepository->index();
+        return $this->workspaceRepositoryImpl->index();
     }
 
     /**
@@ -35,7 +36,7 @@ class WorkspaceService
      */
     public function view(int $id): array|Builder|Collection|Model
     {
-        return $this->workspaceRepository->view($id);
+        return $this->workspaceRepositoryImpl->view($id);
     }
 
     /**
@@ -44,7 +45,7 @@ class WorkspaceService
      */
     public function create(WorkspaceRequest $request): Builder|Model
     {
-        return $this->workspaceRepository->create($request);
+        return $this->workspaceRepositoryImpl->create($request);
     }
 
     /**
@@ -54,7 +55,7 @@ class WorkspaceService
      */
     public function update(WorkspaceRequest $request, int $id): Workspace
     {
-        return $this->workspaceRepository->update($request, $id);
+        return $this->workspaceRepositoryImpl->update($request, $id);
     }
 
     /**
@@ -63,7 +64,7 @@ class WorkspaceService
      */
     public function delete(int $id): bool
     {
-        return $this->workspaceRepository->delete($id);
+        return $this->workspaceRepositoryImpl->delete($id);
     }
 
     /**
@@ -71,6 +72,6 @@ class WorkspaceService
      */
     public function extendedWorkspace(): Collection|array
     {
-        return $this->workspaceRepository->extendedWorkspace();
+        return $this->workspaceRepositoryImpl->extendedWorkspace();
     }
 }

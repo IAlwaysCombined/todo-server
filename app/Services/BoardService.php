@@ -4,21 +4,21 @@ namespace App\Services;
 
 use App\Http\Requests\BoardRequest;
 use App\Models\Board;
-use App\Repositories\BoardRepository;
+use App\RepositoriesImpl\BoardRepositoryImpl;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 class BoardService
 {
-    private BoardRepository $boardRepository;
+    private BoardRepositoryImpl $boardRepositoryImpl;
 
     /**
-     * @param BoardRepository $boardRepository
+     * @param BoardRepositoryImpl $boardRepositoryImpl
      */
-    public function __construct(BoardRepository $boardRepository)
+    public function __construct(BoardRepositoryImpl $boardRepositoryImpl)
     {
-        $this->boardRepository = $boardRepository;
+        $this->boardRepositoryImpl = $boardRepositoryImpl;
     }
 
     /**
@@ -26,7 +26,7 @@ class BoardService
      */
     public function index(): Collection|array
     {
-        return $this->boardRepository->index();
+        return $this->boardRepositoryImpl->index();
     }
 
     /**
@@ -35,7 +35,7 @@ class BoardService
      */
     public function view(int $id): array|Builder|Collection|Model
     {
-        return $this->boardRepository->view($id);
+        return $this->boardRepositoryImpl->view($id);
     }
 
     /**
@@ -44,7 +44,7 @@ class BoardService
      */
     public function create(BoardRequest $request): Board
     {
-        return $this->boardRepository->create($request);
+        return $this->boardRepositoryImpl->create($request);
     }
 
     /**
@@ -54,7 +54,7 @@ class BoardService
      */
     public function update(BoardRequest $request, int $id): Board
     {
-        return $this->boardRepository->update($request, $id);
+        return $this->boardRepositoryImpl->update($request, $id);
     }
 
     /**
@@ -63,6 +63,6 @@ class BoardService
      */
     public function delete(int $id): bool
     {
-        return $this->boardRepository->delete($id);
+        return $this->boardRepositoryImpl->delete($id);
     }
 }
