@@ -5,6 +5,7 @@ namespace App\Models;
 use Database\Factories\BoardFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -27,6 +28,8 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Board whereTitle($value)
  * @method static Builder|Board whereUpdatedAt($value)
  * @method static Builder|Board whereWorkspaceId($value)
+ * @property-read Collection<int, Table> $tables
+ * @property-read int|null $tables_count
  * @mixin Eloquent
  */
 class Board extends Model

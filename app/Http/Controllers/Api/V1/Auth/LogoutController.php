@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Api\V1\Auth;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Api\V1\Auth\base\BaseAuthController;
 use Illuminate\Http\JsonResponse;
 
-class LogoutController extends Controller
+class LogoutController extends BaseAuthController
 {
     /**
      * Выход из приложения с очисткой токена
@@ -14,7 +14,6 @@ class LogoutController extends Controller
      */
     public function logout(): JsonResponse
     {
-        auth()->logout();
-        return response()->json(['message' => 'Выход был осуществлен']);
+        return $this->authService->logout();
     }
 }

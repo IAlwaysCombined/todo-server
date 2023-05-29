@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Api\V1\Auth;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Api\V1\Auth\base\BaseAuthController;
 use App\Http\Resources\TokenResource;
 
-class RefreshController extends Controller
+class RefreshController extends BaseAuthController
 {
     /**
      * Перевыпуск токена после истечения срока действия авторизационного токена
@@ -14,6 +14,6 @@ class RefreshController extends Controller
      */
     public function refresh(): TokenResource
     {
-        return new TokenResource(auth()->refresh('',"", ""));
+        return $this->authService->refresh();
     }
 }

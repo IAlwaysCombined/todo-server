@@ -20,7 +20,7 @@ class SomeUserResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'avatar' => $this->avatar ?? null //TODO: Delete this before implement avatars for users
+            'avatar' => $this->avatar
         ];
     }
 }
