@@ -32,6 +32,7 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Card whereTitle($value)
  * @method static Builder|Card whereUpdatedAt($value)
  * @property-read Collection<int, Comment> $comments
+ * @property-read Collection<int, CheckList> $checkLists
  * @property-read int|null $comments_count
  * @property-read Collection<int, User> $users
  * @property-read int|null $users_count
@@ -61,5 +62,13 @@ class Card extends Model
     public function comments(): HasMany
     {
         return $this->hasMany(Comment::class);
+    }
+
+    /**
+     * Связь к сущьности CheckList
+     */
+    public function checkLists(): HasMany
+    {
+        return $this->hasMany(CheckList::class);
     }
 }
