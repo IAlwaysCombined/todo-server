@@ -50,9 +50,9 @@ class CommentService
     /**
      * @param CommentRequest $request
      * @param int $id
-     * @return Comment
+     * @return Model|Collection|Builder|Comment|array|null
      */
-    public function update(CommentRequest $request, int $id): Comment
+    public function update(CommentRequest $request, int $id): Model|Collection|Builder|Comment|array|null
     {
         return $this->commentRepositoryImpl->update($request, $id);
     }

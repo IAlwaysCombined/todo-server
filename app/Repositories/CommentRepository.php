@@ -51,12 +51,12 @@ class CommentRepository implements CommentRepositoryImpl
     /**
      * @param CommentRequest|Request $request
      * @param int $id
-     * @return Comment
+     * @return Model|Collection|Builder|Comment|array|null
      */
-    public function update(CommentRequest|Request $request, int $id): Comment
+    public function update(CommentRequest|Request $request, int $id): Model|Collection|Builder|Comment|array|null
     {
         $this->comment::query()->find($id)->update($request->all());
-        return $this->comment;
+        return $this->comment::query()->find($id);
     }
 
     /**

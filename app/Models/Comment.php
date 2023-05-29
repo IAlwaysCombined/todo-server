@@ -43,6 +43,16 @@ class Comment extends Model
     ];
 
     /**
+     * Поведение для поля user_id при создании новой записи в базе данных
+     */
+    protected static function booted(): void
+    {
+        static::creating(function ($model) {
+            $model->user_id = auth()->user()->getAuthIdentifier();
+        });
+    }
+
+    /**
      * Связь к сущьности User
      */
     public function user(): HasOne

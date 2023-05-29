@@ -23,8 +23,7 @@ class CommentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'text' => 'required',
-            'user_id' => 'required',
+            'text' => 'required|min:2',
             'card_id' => 'required'
         ];
     }
